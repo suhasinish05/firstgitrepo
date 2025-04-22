@@ -1,0 +1,126 @@
+--------------------------------------------------------------------------------------------------------------------------
+GIT
+--------------------------------------------------------------------------------------------------------------------------
+Class -01 19-04-2025
+--------------------------------------------------------------------------------------------------------------------------
+Git is a version Control tool designed to create and track the versions/Changes in a Project file
+
+For to work with Gitbash ----> use permkey (.pem)
+
+Usual Path: C:\Program Files\Git\etc\ssh
+ServerAliveinterval 50 ----> Add this content in the ssh.config and sshd.config files
+
+sudo yum install git -----> To install the git
+git --version -----> To check the Version of a git
+sudo yum remove git ----> To remove the git
+--------------------------------------------------------------------------------------------------------------------------
+mkdir <directory>
+cd <directory>
+git init -----------> It initializes the current directory as git repository
+--------------------------------------------------------------------------------------------------------------------------
+git config --global user.name "sagar"
+git config --global user.email "sagar@gmail.com"
+
+--------------------------------------------------------------------------------------------------------------------------
+touch f1 f2
+git status -----> It shows the status of the file
+git add f1 -----> This f1 file will move from workspace to staging area
+git status
+git commit -m "added the file f1" ----> This file gets moved from staging to the local repository
+--------------------------------------------------------------------------------------------------------------------------
+Git Architecture:
+
+4 Stages:
+
+Workspace: it is the place, where we can edit the files and directories and workspace is visible to all the braches unless it added and committed
+
+index/staging area : on git add the files moves from workspace to the staging area, where we can save the changes
+
+local Repository: on git commit, the files move from staging to the local repository
+
+central/Remote repository: on git push, the files are moved from local repository to the central/remote repository
+----------------------------------------------------------------------------------------------------------------------------
+git status ------------> it shows whether the files are in workspace , staging or the local repository
+git add <file_name> -----> Move the files from workspace to the staging area
+git add . or git add * or git add -A ----> To move all the file/directories into the staging area
+git commit -m "message" -----> Moves the files from staging area to the local repository
+
+git log ----> Shows the history of repository (like author,commit message, commit_id etc)
+ 
+git log -n ----> To check the latest commits
+ex: git log -1 -----> It displays the latest last one commit
+    git log -2 -----> It displays the latest last two commit
+
+git log <file_name> -----> It gives the history of particular file
+ex: git log f1
+
+git log -n <file_name> ----> last n commits of a particular file
+ex: git log -1 f1
+---------------------------------------------------------------------------------------------------------------------------
+git restore --staged <file_name> -----> it is used revert/unstage from staging to the workspace
+--------------------------------------------------------------------------------------------------------------------------- 
+Class -02 20-04-2025
+---------------------------------------------------------------------------------------------------------------------------
+Branching
+Branching is a parallel development, 2 or more can work on the same piece of code on 2 or more different branches to develop  the new feature and later integrate by merging
+
+HEAD ----> It represents the current commit you have checked onto and the current branch as well
+
+git branch ----> To list the branches
+* ----> Indicates  the current branch
+git branch <branch_name> -----> To create the branch
+git checkout <branch_name> ---> To switch the branches
+
+git merge <branch_name> --------> The specific branch will get merged to the checked out/current branch
+Example1:
+if you want to merge the called feature2 to master ( First we need to checkout to the master and the we execute the command --> git merge feature1)
+
+git branch -d <branch_name>
+or
+git branch -D <branch_name> -----> To delete the branch
+git checkout <commit_id> -----> To checkout to the particular commit id
+-----------------------------------------------------------------------------------------------------------------------------
+How to Change the commit message ?
+
+git commit --amend -m "message"
+or
+git commit --amend -------> It will take us to the VI editor, there we need to change the commit message
+-----------------------------------------------------------------------------------------------------------------------------
+Tags:
+it is the name given to the set of versions or commits , so as to remember and it also indicates the milestone of the project
+
+git tag ----> To list the tags
+git tag <tag_name> <commt_id> ----> To provide the tag to the commit_id
+git tag -d <tag_name> -----> To delete the tag
+git branch <branch_name> <tag_name> ----> To create the branch from the tag
+
+Note: We cannot edit the tags
+------------------------------------------------------------------------------------------------------------------------------
+cherry-pick ----> It is used to merge the specific commit onto the current branch
+
+git cherry-pick <commit_id> ---> It is used to merge the specific commit onto the current branch
+------------------------------------------------------------------------------------------------------------------------------
+git revert <commit_id> -----> It is used to undo the committed changes but history will be tracked
+------------------------------------------------------------------------------------------------------------------------------
+Merge Conflict:
+Merge Conflict occurs when the same piece of code is modified in 2 branches and when we try to merge those 2 branches merge conflict will occur
+
+How should we resolve this merge conflict?
+we should contact the developers, who has modified the code in different branches , they will decide and inform us, whose changes need to be retained
+will take the changes and proceed with the merge
+
+To ge the list of developers ----------> Git log
+
+ex: create f1 file in master branch and put the content in the file f1 add and commit it
+    create the one more branch called feature1 from master and edit the f1 file add and commit it
+    checkout to master branch
+    edit the same file f1 again with some change add it and commit it
+    use git merge command to merge feature1 to master ( git merge feature1)
+    we will face merge conflict now
+    cat f1  ---> shows the merge conflict
+    then we have to contact developers to resolve the merge conflict by retaining the change
+    vi f1 ---> edit and save the changes and then add it and commit it
+    Then merge would have completed successfully
+------------------------------------------------------------------------------------------------------------------------------
+  
+ 	
